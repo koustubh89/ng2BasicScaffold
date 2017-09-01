@@ -1,6 +1,6 @@
 {
   "name": "angular-hn",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -9,6 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "6.11.1"
   },
   "private": true,
   "dependencies": {
