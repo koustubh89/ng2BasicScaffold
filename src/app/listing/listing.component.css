@@ -1,0 +1,27 @@
+.card-container {
+    float: left;
+    margin: 2rem 0;
+}
+.card-container .card {
+    padding: 1.5rem;
+    width: 250px;
+    height: 200px;
+    position: relative;
+    margin: 1rem 0;
+    border: 1px solid #aaa;
+    background: linear-gradient(#ccc, #fff); /* Standard syntax */
+}
+.card-container .card .author-name {
+    display: block;
+    position: absolute;
+    bottom: 5rem;
+    text-align: right;
+}
+.card-container .card .upvote-button {
+    display: block;
+    position: absolute;
+    bottom: 1rem;
+}
+.margin-top-20 {
+    margin-top: 5rem;
+}
