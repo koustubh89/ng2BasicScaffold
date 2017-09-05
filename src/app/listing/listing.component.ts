@@ -15,7 +15,9 @@ import { Post } from '../shared/post.interface';
 export class ListingComponent implements OnInit {
   posts: Post[];
 
-  constructor(private _hackerNewsService: HackerNewsService) {}
+  constructor(private _hackerNewsService: HackerNewsService) {
+    console.log('reaching listing');
+  }
 
   ngOnInit() {
     this.getPosts();

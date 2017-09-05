@@ -1,6 +1,8 @@
+listing
 <div class="row margin-top-20">
-    <div *ngFor="let post of posts" class="card-container col-xs-3">
+    <div *ngFor="let post of posts; let i = index" class="card-container col-xs-3">
         <div class="card">
+            <a [routerLink]="['details', i]">{{i}}</a>
             {{post.title}} by 
             
             <div class="author-name">    
