@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -32,24 +33,21 @@ export class AppDetailComponent implements OnInit {
        this.id = +params['id']; // (+) converts string 'id' to a number
        console.log('onInit => this.id', this.id);
       });
-    }
+  }
 
-    getPosts() {
-      this._hackerNewsService
-      .getFeed('news')
-      .subscribe(posts => {
-        this.posts = posts;
-        this.mapPosts();
-      });
-    }
+  getPosts() {
+    this._hackerNewsService
+    .getFeed('news')
+    .subscribe(posts => {
+      this.posts = posts;
+      this.mapPosts();
+    });
+  }
 
-    mapPosts() {
-      for (let count = 0; count < this.posts.length; count++) {
-        if (this.posts[count].id === this.id) {
-          this.post = this.posts[count];
-      }
+  mapPosts() {
+    const idx = _.findIndex(this.posts, {id: this.id});
+    if (idx > -1) {
+      this.post = this.posts[idx];
     }
-
-    console.log('this post', this.post);
   }
 }
