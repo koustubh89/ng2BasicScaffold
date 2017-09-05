@@ -2,12 +2,12 @@ listing
 <div class="row margin-top-20">
     <div *ngFor="let post of posts; let i = index" class="card-container col-xs-3">
         <div class="card">
-            <a [routerLink]="['details', i]">{{i}}</a>
+            <a [routerLink]="['details', post.id]">{{i}}</a>
             {{post.title}} by 
-            
+
             <div class="author-name">    
                 {{post.user}} , {{post.time_ago}}
-            </div>  
+            </div>
             <button class="btn btn-primary upvote-button" (click)="upvotedNews()">Upvote</button>
         </div>
     </div>
