@@ -14,9 +14,11 @@ import { Post } from '../shared/post.interface';
 })
 export class ListingComponent implements OnInit {
   posts: Post[];
+  showTabularView: boolean;
 
   constructor(private _hackerNewsService: HackerNewsService) {
     console.log('reaching listing');
+    this.showTabularView = true;
   }
 
   ngOnInit() {

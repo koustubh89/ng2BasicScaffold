@@ -1,14 +1,27 @@
-listing
-<div class="row margin-top-20">
+<div class="row pos-fixed margin-top-5">
+    <div class="btn-group pull-right col-xs-12">
+        <label class="btn btn-primary" (click)="showTabularView = true" uib-btn-checkbox [ngClass]="{'active': showTabularView}">table view</label>
+        <label class="btn btn-primary" (click)="showTabularView = false" uib-btn-checkbox [ngClass]="{'active': !showTabularView}">list view</label>
+    </div>
+</div>
+
+
+<div class="row margin-top-10" *ngIf="!showTabularView" >
     <div *ngFor="let post of posts; let i = index" class="card-container col-xs-3">
         <div class="card">
             <a [routerLink]="['details', post.id]">{{i}}</a>
             {{post.title}} by 
 
-            <div class="author-name">    
+            <div class="author-name">
                 {{post.user}} , {{post.time_ago}}
             </div>
             <button class="btn btn-primary upvote-button" (click)="upvotedNews()">Upvote</button>
         </div>
+    </div>
+</div>
+
+<div class="row margin-top-10" *ngIf="showTabularView">
+    <div class="col-sm-12">
+        tabular view
     </div>
 </div>

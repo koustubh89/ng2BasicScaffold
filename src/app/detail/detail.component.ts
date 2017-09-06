@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
+import { uib } from 'angular-bootstrap/ui-bootstrap-tpls.min';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { HackerNewsService } from '../shared/hacker-news.service';
 import { Post } from '../shared/post.interface';
 import { ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'app-hn-detail',
