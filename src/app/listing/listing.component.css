@@ -15,9 +15,15 @@
 }
 .card-container .card .author-name {
     display: block;
-    position: absolute;
-    bottom: 5rem;
-    text-align: right;
+    text-align: left;
+    color: #00f;
+    height: 16px;
+    overflow: hidden;
+}
+
+.card-container .card .body-content {
+    overflow: hidden;
+    height: 50%;
 }
 .card-container .card .upvote-button {
     display: block;

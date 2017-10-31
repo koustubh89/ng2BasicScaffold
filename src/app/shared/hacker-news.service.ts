@@ -9,7 +9,7 @@ import { Post } from './post.interface';
 export class HackerNewsService {
   baseUrl: string;
   constructor(private _http: Http) {
-    this.baseUrl = 'https://node-hnapi.herokuapp.com';
+    this.baseUrl = 'https://jsonplaceholder.typicode.com';
   }
 
   // getFeed(feedType:string):Observable<Post[]>{
@@ -19,7 +19,9 @@ export class HackerNewsService {
   getFeed(feedType: string): Observable<Post[]> {
     return this._http
       .get(`${this.baseUrl}/${feedType}`)
-      .map(response => response.json());
+      .map(response =>
+        response.json()
+      );
   }
 }
 

@@ -27,7 +27,7 @@ export class ListingComponent implements OnInit {
 
   getPosts() {
     this._hackerNewsService
-      .getFeed('news')
+      .getFeed('comments')
       .subscribe(
         posts => (this.posts = posts)
       );

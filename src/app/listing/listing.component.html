@@ -10,10 +10,12 @@
     <div *ngFor="let post of posts; let i = index" class="card-container col-xs-3">
         <div class="card">
             <a [routerLink]="['details', post.id]">{{i}}</a>
-            {{post.title}} by 
-
+            <div class="body-content">
+                {{post.body}}  
+            </div>
+            by
             <div class="author-name">
-                {{post.user}} , {{post.time_ago}}
+                {{post.name}} , {{post.email}}
             </div>
             <button class="btn btn-primary upvote-button" (click)="upvotedNews()">Upvote</button>
         </div>
