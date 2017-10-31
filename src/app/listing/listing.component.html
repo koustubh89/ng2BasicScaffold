@@ -1,7 +1,7 @@
 <div class="row pos-fixed margin-top-5">
     <div class="btn-group pull-right col-xs-12">
-        <label class="btn btn-primary" (click)="showTabularView = true" uib-btn-checkbox [ngClass]="{'active': showTabularView}">table view</label>
-        <label class="btn btn-primary" (click)="showTabularView = false" uib-btn-checkbox [ngClass]="{'active': !showTabularView}">list view</label>
+        <label class="btn btn-primary" (click)="showTabularView = true" uib-btn-checkbox [ngClass]="{'active': showTabularView}">Table View</label>
+        <label class="btn btn-primary" (click)="showTabularView = false" uib-btn-checkbox [ngClass]="{'active': !showTabularView}">List View</label>
     </div>
 </div>
 
@@ -29,6 +29,6 @@
 
 <div class="row margin-top-10" *ngIf="showTabularView">
     <div class="col-sm-12">
-        tabular view
+        Tabular View
     </div>
 </div>
