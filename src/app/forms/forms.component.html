@@ -1,0 +1,10 @@
+<form name="SampleForm" #userForm="ngForm">
+    <!-- Simple text box with required validation -->
+    <div class="form-field row">
+        <label class="form-labels col-xs-3" for="fName">Name</label>
+        <input type="text" class="col-xs-2" name="fName" #fName="ngModel" [(ngModel)]="user.name" required />
+    </div>
+    <div [hidden]="fName.valid || fName.pristine" class="alert-danger">You did not enter a field</div>
+
+    <button type="submit">Submit</button>
+</form>
