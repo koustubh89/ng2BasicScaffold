@@ -14,8 +14,13 @@
                 {{post.body}}  
             </div>
             by
-            <div class="author-name">
-                {{post.name}} , {{post.email}}
+            <div class="author-name clearfix">
+                <div class="name pull-left">
+                    {{post.name}} ,
+                </div>
+                <div class="email pull-right">
+                    {{post.email}}
+                </div>
             </div>
             <button class="btn btn-primary upvote-button" (click)="upvotedNews()">Upvote</button>
         </div>
