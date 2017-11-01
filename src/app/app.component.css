@@ -1,3 +1,7 @@
+.app-container {
+    padding-top: 5rem;
+}
+
 .pos-fixed {
     position: fixed;
 }
