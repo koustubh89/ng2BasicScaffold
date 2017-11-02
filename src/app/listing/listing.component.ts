@@ -29,8 +29,9 @@ export class ListingComponent implements OnInit {
   }
 
   getPosts() {
+    const largeDataJson = false;
     this._hackerNewsService
-      .getFeed('comments')
+      .getFeed('comments', largeDataJson)
       .subscribe(
         posts => (this.posts = posts)
       );

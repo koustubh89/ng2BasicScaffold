@@ -37,7 +37,7 @@ export class AppDetailComponent implements OnInit {
 
   getPosts() {
     this._hackerNewsService
-    .getFeed('news')
+    .getFeed('news', false)
     .subscribe(posts => {
       this.posts = posts;
       this.mapPosts();
