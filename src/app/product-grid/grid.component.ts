@@ -1,31 +1,30 @@
-import { Component } from '@angular/core';
-import { products } from '../shared/products-data';
-
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { HackerNewsService } from '../shared/hacker-news.service';
 
 @Component({
     selector: 'app-grid-view',
     templateUrl: './grid.component.html',
-    styleUrls: ['./grid.component.css'],
-    // template: `
-    //     <kendo-grid [data]="gridData" [height]="410">
-    //         <kendo-grid-column field="ProductID" title="ID" width="40">
-    //         </kendo-grid-column>
-    //         <kendo-grid-column field="ProductName" title="Name" width="250">
-    //         </kendo-grid-column>
-    //         <kendo-grid-column field="Category.CategoryName" title="Category">
-    //         </kendo-grid-column>
-    //         <kendo-grid-column field="UnitPrice" title="Price" width="80">
-    //         </kendo-grid-column>
-    //         <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
-    //         </kendo-grid-column>
-    //         <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
-    //             <ng-template kendoGridCellTemplate let-dataItem>
-    //                 <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
-    //             </ng-template>
-    //         </kendo-grid-column>
-    //     </kendo-grid>
-    // `
+    styleUrls: ['./grid.component.css']
 })
-export class GridComponent {
-    private gridData: any[] = products;
+export class GridComponent implements OnInit {
+    private gridData: any;
+
+    constructor(private _hackerNewsService: HackerNewsService) {
+        console.log('reaching listing');
+    }
+
+    ngOnInit() {
+        this.getGridData();
+    }
+
+    getGridData() {
+        this._hackerNewsService
+        .getFeed('users')
+        .subscribe(
+            users => (this.gridData = users)
+        );
+        console.log(this.gridData);
+    }
 }
