@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -29,7 +30,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
     GridComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, GridModule,
+    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, GridModule, NgbModule.forRoot(),
     RouterModule.forRoot(ContactsAppRoutes)
   ],
   providers: [WindowRef],

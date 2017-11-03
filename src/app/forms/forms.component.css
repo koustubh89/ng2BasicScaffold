@@ -1,5 +1,9 @@
 @import '../app.component.css';
 
-.form-field.row {
+.form-field {
     padding: 10px 20px;
+}
+
+.form-error {
+    padding: 0.5rem 1rem;
 }
