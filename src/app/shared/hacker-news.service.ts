@@ -8,17 +8,24 @@ import { Post } from './post.interface';
 @Injectable()
 export class HackerNewsService {
   baseUrl: string;
+  longDataBaseUrl: string;
+
   constructor(private _http: Http) {
     this.baseUrl = 'https://jsonplaceholder.typicode.com';
+    this.longDataBaseUrl = 'http://demo0167929.mockable.io';
   }
 
   // getFeed(feedType:string):Observable<Post[]>{
   //   return fetchAsync(`${this.baseUrl}/${feedType}`);
   // }
 
-  getFeed(feedType: string): Observable<Post[]> {
+  getFeed(feedType: string, largeData: boolean): Observable<Post[]> {
+    let url: string;
+    if (largeData)  {
+      url = this.longDataBaseUrl;
+    }
     return this._http
-      .get(`${this.baseUrl}/${feedType}`)
+      .get(`${url}/${feedType}`)
       .map(response =>
         response.json()
       );

@@ -13,7 +13,11 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { ListingComponent } from './listing/listing.component';
 import { AppDetailComponent } from './detail/detail.component';
+import { GridComponent } from './product-grid/grid.component';
 import { FormsComponent } from './forms/forms.component';
+import { WindowRef } from './shared/window-service';
+
+import { GridModule } from '@progress/kendo-angular-grid';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,14 @@ import { FormsComponent } from './forms/forms.component';
     HeaderComponent,
     ListingComponent,
     AppDetailComponent,
-    FormsComponent
+    FormsComponent,
+    GridComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, NgbModule.forRoot(),
+    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, GridModule, NgbModule.forRoot(),
     RouterModule.forRoot(ContactsAppRoutes)
   ],
-  providers: [],
+  providers: [WindowRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
