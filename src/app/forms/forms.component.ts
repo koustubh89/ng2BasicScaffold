@@ -10,18 +10,27 @@ export class FormsComponent implements OnInit {
   user: User;
   dobOpened: boolean;
   cities: Array<string> = ['Gurgaon', 'Bangalore', 'Boston', ' Munich'];
-  selectedCity: string;
+  countries: Array<string> = ['India', 'USA', 'Germany'];
+  selectedCountry: string;
+  breadcrumbs: Array<object>;
 
   constructor() {
     this.user = new User('', '', {}, '', '');
   }
 
   ngOnInit() {
-    this.selectedCity = 'Select a city';
+    this.selectedCountry = 'Select a country';
+    this.breadcrumbs = [
+      { text: 'Home', location: '/home', state: 'inactive' },
+      { text: 'Forms', location: '/forms', state: 'active' }
+    ]
   }
 
-  changeCity(city) {
-    console.log(city);
-    this.selectedCity = city;
+  changeCountry(country) {
+    this.selectedCountry = country;
+  }
+
+  validateForm(form) {
+    console.log(form);
   }
 }
