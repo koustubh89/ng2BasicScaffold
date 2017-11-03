@@ -19,17 +19,21 @@
     [data]="gridData" 
     [height]="410"
     [pageSize]="10"
-    [skip]="0"
+    [skip]="skip"
     [pageable]="true"
     [scrollable]="'none'"
+    [filterable]="menu"
+    [filter]="state.filter"
     [sortable]="{
         allowUnsort: true,
         mode: true ? 'multiple' : 'single'
         }"
     [sort]="sort"
     (sortChange)="sortChange($event)"
+    (dataStateChange)="dataStateChange($event)"
     >
-    <kendo-grid-column field="id" title="ID" width="50"> </kendo-grid-column>
+    <!-- (pageChange)="pageChange($event)" -->
+    <kendo-grid-column field="id" title="ID" width="50" [filterable]="false"> </kendo-grid-column>
     <kendo-grid-column field="name" title="Name" > </kendo-grid-column>
     <kendo-grid-column field="username" title="Category"> </kendo-grid-column>
     <kendo-grid-column field="email" title="Email" width="100" > </kendo-grid-column>

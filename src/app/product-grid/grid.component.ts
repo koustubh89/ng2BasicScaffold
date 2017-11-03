@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { HackerNewsService } from '../shared/hacker-news.service';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
-import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
+import { SortDescriptor, orderBy, process, State } from '@progress/kendo-data-query';
+import { GridDataResult, PageChangeEvent, DataStateChangeEvent } from '@progress/kendo-angular-grid';
 
 @Component({
     selector: 'app-grid-view',
@@ -14,6 +14,18 @@ export class GridComponent implements OnInit {
     private gridView: GridDataResult;
     private gridData: any;
     private items: any[] = [];
+
+    private state: State = {
+        skip: 0,
+        take: 5,
+
+        // Initial filter descriptor
+        filter: {
+            logic: 'and',
+            filters: [{ field: 'ProductName', operator: 'contains', value: 'Chef' }]
+        }
+    };
+
     public skip: number;
     public pageSize = 10;
     public users: any[] = [];
@@ -34,22 +46,33 @@ export class GridComponent implements OnInit {
         .subscribe(
             users => {
                 this.gridData = orderBy(users, this.sort);
-                // this.gridData = {
-                //     data: orderBy(this.users, this.sort),
-                //     total: this.users.length
-                // }
+                this.users = users;
             }
         );
+    }
+
+    protected dataStateChange(state: DataStateChangeEvent): void {
+        this.state = state;
+        this.gridData = process(this.gridData, this.state);
     }
 
     deleteRecord() {
         console.log('trying to delete');
     }
 
-    pageChange(event: any): void {
-        this.skip = event.skip;
-        this.loadItems();
+    /** Paging implementation
+     pageChange(event: any): void {
+         this.skip = event.skip;
+         this.loadItemsPaging();
+        }
+
+    private loadItemsPaging(): void {
+        this.gridView = {
+            data: this.items.slice(this.skip, this.skip + this.pageSize),
+            total: this.items.length
+        };
     }
+    */
 
     loadItems(): void {
         this.gridView = {
