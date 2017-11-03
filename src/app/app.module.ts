@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,7 @@ import { FormsComponent } from './forms/forms.component';
     FormsComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule,
+    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, NgbModule.forRoot(),
     RouterModule.forRoot(ContactsAppRoutes)
   ],
   providers: [],

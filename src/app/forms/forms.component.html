@@ -1,10 +1,142 @@
-<form name="SampleForm" #userForm="ngForm">
-    <!-- Simple text box with required validation -->
-    <div class="form-field row">
-        <label class="form-labels col-xs-3" for="fName">Name</label>
-        <input type="text" class="col-xs-2" name="fName" #fName="ngModel" [(ngModel)]="user.name" required />
-    </div>
-    <div [hidden]="fName.valid || fName.pristine" class="alert-danger">You did not enter a field</div>
+<form name="SampleForm" #userForm="ngForm" novalidate>
+  <!-- Text box input with required and min length validation -->
+  <div class="form-field row">
+    <label class="form-labels col-3" for="name">Name</label>
+    <input
+      type="text"
+      class="col-2"
+      name="name"
+      #name="ngModel"
+      [(ngModel)]="user.name"
+      minlength="3"
+      required />
+  </div>
+  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger form-error">
+    <div *ngIf="name.errors.required">You did not enter a name</div>
+    <div *ngIf="name.errors.minlength">Name field must be at least 3 character long</div>
+  </div>
 
-    <button type="submit">Submit</button>
+  <!-- Email input with required and pattern validation -->
+  <div class="form-field row">
+      <label class="form-labels col-3" for="email">Email</label>
+      <input
+        type="email"
+        class="col-2" 
+        name="email"
+        #email="ngModel"
+        [(ngModel)]="user.email"
+        required
+        email
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+  </div>
+  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger form-error">
+    <div *ngIf="email.errors.required">You did not enter an email</div>
+    <div *ngIf="email.errors.email">Email is not valid</div>
+    <div *ngIf="email.errors.pattern">Email is not correct</div>
+  </div>
+
+  <!-- Checkbox input without required validation -->
+  <div class="form-field row">
+    <label class="form-labels col-3">Security Type</label>
+    <div class="col-2">
+      <label for="mail">Email Notification</label>
+      <input id="mail" type="checkbox" [(ngModel)]="user.securityType.email" name="checkboxes">
+    </div>
+
+      <div class="col-2">
+          <label for="sms">SMS</label>
+          <input id="sms" type="checkbox" [(ngModel)]="user.securityType.sms" name="checkboxes">
+      </div>
+
+      <div class="col-2">
+          <label for="otp">OTP</label>
+          <input id="otp" type="checkbox" [(ngModel)]="user.securityType.otp" name="checkboxes">
+      </div>
+  </div>
+
+  <!-- Radio button input with required validation -->
+  <div class="form-field row">
+      <label class="form-labels col-3">Prefered Color</label>
+      <div class="col-2">
+          <label class="option">Red</label>
+          <input type="radio" #color="ngModel" [(ngModel)]="user.color" value="red" name="radios" required>
+          <label class="option">Green</label>
+          <input type="radio" [(ngModel)]="user.color" value="green" name="radios" required>
+          <label class="option">Blue</label>
+          <input type="radio" [(ngModel)]="user.color" value="blue" name="radios" required>
+      </div>
+  </div>
+  <div *ngIf="color.invalid && color.touched" class="alert alert-danger form-error">
+      <div *ngIf="color.errors.required">You have not selected an option</div>
+  </div>
+
+  <!-- Dropdown/Select/Options menu with single selection and required validation -->
+  <div class="form-field row">
+    <label class="form-labels col-3">City</label>
+    <div class="col-2">
+      <select
+        id="city"
+        name="single-select"
+        #city="ngModel"
+        [(ngModel)]="user.citySelected"
+        required>
+        <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="city.invalid && city.touched" class="alert alert-danger form-error">
+    <div *ngIf="city.errors.required">You have not selected an option</div>
+  </div>
+
+  <!-- Dropdown/Select/Options menu with multiple selection and required validation -->
+
+  <!-- ngbootstrap Dropdown menu without validation -->
+  <div class="form-field row">
+    <label class="form-labels col-3">City (ngbootstrap dropdown)</label>
+    <div class="col-2">
+      <div ngbDropdown class="d-inline-block" #ngbCity="ngbDropdown">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{selectedCity}}</button>
+        <div ngbDropdownMenu>
+          <button *ngFor="let city of cities" class="dropdown-item" [value]="city" (click)="changeCity(city)">{{city}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div ngbDropdown placement="top-right" class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Select a city</button>
+        <div ngbDropdownMenu>
+          <button *ngFor="let city of cities" class="dropdown-item" [value]="city">{{city}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2">
+      <button class="btn btn-outline-success" (click)="$event.stopPropagation(); ngbCity.open();">Open</button>
+      <button class="btn btn-outline-danger" (click)="$event.stopPropagation(); ngbCity.close();">Close</button>
+    </div>
+  </div>
+
+  <!-- Datepicker without any validation (Needs ng-bootstrap module to be installed) -->
+  <div class="form-field row">
+    <label class="form-labels col-3">DOB</label>
+    <div class="input-group col-4">
+      <input
+          class="form-control"
+          placeholder="dd-mm-yyyy"
+          name="dobPicker"
+          [(ngModel)]="user.dob"
+          ngbDatepicker
+          #dobPicker="ngbDatepicker" />
+      <button class="btn btn-outline-success input-group-btn" (click)="dobPicker.toggle()" type="button" value="Cal">Cal</button>
+    </div>
+  </div>
+
+  <!-- Timepicker without any validation (Needs ng-bootstrap module to be installed) -->
+  <div class="form-field row">
+      <label class="form-labels col-3">Time of Meeting</label>
+      <ngb-timepicker
+          name="meeting"
+          [(ngModel)]="user.meeting"
+          [meridian]="true"></ngb-timepicker>
+  </div>
 </form>
