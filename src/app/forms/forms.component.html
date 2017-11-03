@@ -108,18 +108,16 @@
   <!-- ngbootstrap Dropdown menu without validation -->
   <div class="form-field row">
     <label class="form-labels col-3">Country (ngbootstrap dropdown)</label>
-    <div class="col-2">
-      <div ngbDropdown class="d-inline-block" #ngbCity="ngbDropdown">
-        <button class="btn btn-outline-primary" id="countrySelect" ngbDropdownToggle>{{selectedCountry}}</button>
+      <div class="col-2" ngbDropdown #ngbCountry="ngbDropdown">
+        <button class="dropdown-button btn btn-outline-primary" id="countrySelect" ngbDropdownToggle>{{selectedCountry}}</button>
         <div ngbDropdownMenu>
-          <button *ngFor="let country of countries" class="dropdown-item" [value]="country" (click)="changeCountry(country)">{{city}}</button>
+          <button *ngFor="let country of countries" class="dropdown-item" [value]="country" (click)="changeCountry(country)">{{country}}</button>
         </div>
-      </div>
     </div>
 
     <div class="col-2">
-      <button class="btn btn-outline-success" (click)="$event.stopPropagation(); ngbCity.open();">Open</button>
-      <button class="btn btn-outline-danger" (click)="$event.stopPropagation(); ngbCity.close();">Close</button>
+      <button class="btn btn-outline-success" (click)="$event.stopPropagation(); ngbCountry.open();">Open</button>
+      <button class="btn btn-outline-danger" (click)="$event.stopPropagation(); ngbCountry.close();">Close</button>
     </div>
   </div>
 
