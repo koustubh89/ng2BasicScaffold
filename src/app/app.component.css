@@ -1,9 +1,23 @@
 .app-container {
     padding-top: 5rem;
 }
-
 .pos-fixed {
     position: fixed;
+}
+.back-button {
+    color: black;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.back-icon {
+    width: 1rem;
+}
+.breadcrumb-item {
+    font-size: 0.9rem;
+}
+.breadcrumb-item.active {
+    text-decoration: none;
+    cursor: default;
 }
 .margin-top-5 {
     margin-top: 5rem;
