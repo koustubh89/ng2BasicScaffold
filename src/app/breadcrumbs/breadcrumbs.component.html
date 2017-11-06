@@ -1,0 +1,14 @@
+<div class="row nav-container">
+    <div class="col-1">
+      <a [routerLink]="['/home']" class="back-button">
+        <img src="../assets/img/back.svg" alt="back" class="back-icon" /><span>Back</span>
+      </a>
+    </div>
+  
+    <div class="col breadcrumbs">
+      <a *ngFor="let breadcrumb of breadcrumbs; let i = index"
+          [routerLink]="(breadcrumb.state === 'active') ? breadcrumb.location : '#'"
+          class="breadcrumb-item"
+          [ngClass]="{'active': (breadcrumb.state === 'active')}">{{breadcrumb.text}}</a>
+    </div>
+</div>

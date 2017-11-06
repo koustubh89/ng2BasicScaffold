@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { ListingComponent } from './listing/listing.component';
 import { AppDetailComponent } from './detail/detail.component';
 import { GridComponent } from './product-grid/grid.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FormsComponent } from './forms/forms.component';
 import { WindowRef } from './shared/window-service';
 
@@ -27,7 +28,8 @@ import { GridModule } from '@progress/kendo-angular-grid';
     ListingComponent,
     AppDetailComponent,
     FormsComponent,
-    GridComponent
+    GridComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, GridModule, NgbModule.forRoot(),

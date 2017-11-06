@@ -41,11 +41,10 @@
     <kendo-grid-column field="phone" title="Contact" > </kendo-grid-column>
     <kendo-grid-column field="company.name" title="Organization" width="150"> </kendo-grid-column>
     <kendo-grid-column field="company.bs" title="Business function" width="250" > </kendo-grid-column>
-    <!-- <kendo-grid-column field="Discontinued" title="Discontinued" >     <ng-template kendoGridCellTemplate let-dataItem>
-            <input type="checkbox" [checked]="dataItem.Discontinued" [changed]="" />
+    <kendo-grid-column title="Action" width="170" class="action-container">     
+        <ng-template kendoGridCellTemplate> 
+            <span class="edit" (click)="editRecord(dataItem)"> edit</span>   
+            <span class="delete" (click)="deleteRecord(dataItem)"> delete</span>   
         </ng-template>
-    </kendo-grid-column> -->
-    <kendo-grid-column title="Action" width="170" > 
-        <div ngClick="vm.deleteRecord(dataItem)"> delete</div>    
-    </kendo-grid-column>    
+    </kendo-grid-column>
 </kendo-grid>

@@ -52,27 +52,18 @@ export class GridComponent implements OnInit {
     }
 
     protected dataStateChange(state: DataStateChangeEvent): void {
+        console.log('data state change event');
         this.state = state;
         this.gridData = process(this.gridData, this.state);
+    }
+
+    editRecord() {
+        console.log('trying to edit');
     }
 
     deleteRecord() {
         console.log('trying to delete');
     }
-
-    /** Paging implementation
-     pageChange(event: any): void {
-         this.skip = event.skip;
-         this.loadItemsPaging();
-        }
-
-    private loadItemsPaging(): void {
-        this.gridView = {
-            data: this.items.slice(this.skip, this.skip + this.pageSize),
-            total: this.items.length
-        };
-    }
-    */
 
     loadItems(): void {
         this.gridView = {
@@ -82,6 +73,7 @@ export class GridComponent implements OnInit {
     }
 
     public sortChange(sort: SortDescriptor[]): void {
+        console.log('sort change event');
         this.sort = sort;
         this.getGridData();
     }
