@@ -23,6 +23,8 @@ export class HackerNewsService {
     let url: string;
     if (largeData)  {
       url = this.longDataBaseUrl;
+    } else {
+      url = this.baseUrl;
     }
     return this._http
       .get(`${url}/${feedType}`)

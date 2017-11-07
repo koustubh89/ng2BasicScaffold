@@ -1,3 +1,7 @@
 .k-grid-content .k-grid-header-wrap table thead th.k-header {
     padding: 10px 20px;
 }
+
+.action-container span:hover {
+    cursor: pointer;
+}

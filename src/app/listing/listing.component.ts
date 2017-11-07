@@ -20,12 +20,18 @@ export class ListingComponent implements OnInit {
   constructor(private _hackerNewsService: HackerNewsService,
     private winRef: WindowRef
   ) {
-    console.log('reaching listing');
     this.showTabularView = true;
   }
 
   ngOnInit() {
     this.getPosts();
+  }
+
+  changeView() {
+    this.showTabularView = !this.showTabularView;
+    if (!this.showTabularView) {
+      this.getPosts();
+    }
   }
 
   getPosts() {
@@ -36,7 +42,6 @@ export class ListingComponent implements OnInit {
         posts => (this.posts = posts)
       );
       console.log(this.posts);
-
   }
 
   upvotedNews() {
