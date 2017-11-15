@@ -1,21 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../shared/user.model';
+// import { User } from '../shared/user.model'; // Using User constructor model
 
 @Component({
   selector: 'app-sample-form',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.css']
 })
+/* Import FormsModule and NgbModule in your app.module.ts */
 export class FormsComponent implements OnInit {
-  user: User;
+  // user: User; // Using User constructor model from user.model.ts
+  user: Object;
   dobOpened: boolean;
   cities: Array<string> = ['Gurgaon', 'Bangalore', 'Boston', ' Munich'];
   countries: Array<string> = ['India', 'USA', 'Germany'];
   selectedCountry: string;
+  submitted = false;
   breadcrumbs: Array<object>;
 
   constructor() {
-    this.user = new User('', '', {}, '', '');
+    // this.user = new User('', '', {}, '', ''); // Using User constructor model from user.model.ts
+    this.user = {
+      name: '',
+      email: '',
+      securityType: {},
+      color: '',
+      city: '',
+      meeting: {}
+    }
   }
 
   ngOnInit() {
@@ -30,7 +41,7 @@ export class FormsComponent implements OnInit {
     this.selectedCountry = country;
   }
 
-  validateForm(form) {
-    console.log(form);
+  onSubmit() {
+    this.submitted = true;
   }
 }

@@ -7,82 +7,98 @@
 
   <div class="col breadcrumbs">
     <a *ngFor="let breadcrumb of breadcrumbs; let i = index"
-        [routerLink]="(breadcrumb.state === 'active') ? breadcrumb.location : '#'"
+        [routerLink]="breadcrumb.location"
         class="breadcrumb-item"
         [ngClass]="{'active': (breadcrumb.state === 'active')}">{{breadcrumb.text}}</a>
   </div>
 </div>
 
-<form name="SampleForm" #sampleForm="ngForm" novalidate>
+<form name="SampleForm" #sampleForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
   <!-- Text box input with required and min length validation -->
   <div class="form-field row">
     <label class="form-labels col-3" for="name">Name</label>
-    <input
-      type="text"
-      class="col-2"
-      name="name"
-      #name="ngModel"
-      [(ngModel)]="user.name"
-      minlength="3"
-      required />
-  </div>
-  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger form-error">
-    <div *ngIf="name.errors.required">You did not enter a name</div>
-    <div *ngIf="name.errors.minlength">Name field must be at least 3 character long</div>
+    <div class="col-2">
+      <input
+        type="text"
+        name="name"
+        [ngClass]="{'error-field': name.invalid && sampleForm.submitted}"
+        #name="ngModel"
+        [(ngModel)]="user.name"
+        minlength="3"
+        required> <!-- Include form-control class to get Bootstrap Input styles -->
+    </div>
+    <div *ngIf="name.invalid && sampleForm.submitted" class="col-3 form-error"> <!-- Include alert & alert-danger class to get Bootstrap Error styles -->
+      <div *ngIf="name.errors.required">You did not enter a name</div>
+      <div *ngIf="name.errors.minlength">Name field must be at least 3 character long</div>
+    </div>
   </div>
 
   <!-- Email input with required and pattern validation -->
   <div class="form-field row">
-      <label class="form-labels col-3" for="email">Email</label>
+    <label class="form-labels col-3" for="email">Email</label>
+    <div class="col-2">
       <input
         type="email"
-        class="col-2" 
+        [ngClass]="{'error-field': email.invalid && sampleForm.submitted}"
         name="email"
         #email="ngModel"
         [(ngModel)]="user.email"
         required
         email
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
-  </div>
-  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger form-error">
-    <div *ngIf="email.errors.required">You did not enter an email</div>
-    <div *ngIf="email.errors.email">Email is not valid</div>
-    <div *ngIf="email.errors.pattern">Email is not correct</div>
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+    </div>
+    <div *ngIf="email.invalid && sampleForm.submitted" class="col-3 form-error">
+      <div *ngIf="email.errors.required">You did not enter an email</div>
+      <div *ngIf="email.errors.pattern">Email is not correct</div>
+      <!-- <div *ngIf="email.email.pattern">Email is not correct</div> --> <!-- Default Email pattern provided with 'email' attribute -->
+    </div>
   </div>
 
-  <!-- Checkbox input without required validation -->
+  <!-- Checkbox input without validation -->
   <div class="form-field row">
     <label class="form-labels col-3">Security Type</label>
     <div class="col-2">
-      <label for="mail">Email Notification</label>
-      <input id="mail" type="checkbox" [(ngModel)]="user.securityType.email" name="checkboxes">
+      <label for="mail" class="checkbox-option">
+        <input id="mail" type="checkbox" [(ngModel)]="user.securityType.email" name="checkboxes">
+        Email Notification
+      </label>
+      <label for="sms" class="checkbox-option">
+        <input id="sms" type="checkbox" [(ngModel)]="user.securityType.sms" name="checkboxes">
+        SMS
+      </label>
+      <label for="otp" class="checkbox-option">
+        <input id="otp" type="checkbox" [(ngModel)]="user.securityType.otp" name="checkboxes">
+        OTP
+      </label>
     </div>
-
-      <div class="col-2">
-          <label for="sms">SMS</label>
-          <input id="sms" type="checkbox" [(ngModel)]="user.securityType.sms" name="checkboxes">
-      </div>
-
-      <div class="col-2">
-          <label for="otp">OTP</label>
-          <input id="otp" type="checkbox" [(ngModel)]="user.securityType.otp" name="checkboxes">
-      </div>
   </div>
 
   <!-- Radio button input with required validation -->
   <div class="form-field row">
-      <label class="form-labels col-3">Prefered Color</label>
-      <div class="col-2">
-          <label class="option">Red</label>
-          <input type="radio" #color="ngModel" [(ngModel)]="user.color" value="red" name="radios" required>
-          <label class="option">Green</label>
+    <label class="form-labels col-3">Prefered Color</label>
+    <div class="col-2" [ngClass]="{'label-error': color.invalid && sampleForm.submitted}">
+        <label class="radio-option">
+          <input
+            type="radio"
+            #color="ngModel"
+            [(ngModel)]="user.color"
+            value="red"
+            name="radios"
+            required>
+          Red
+        </label>
+        <label class="radio-option">
           <input type="radio" [(ngModel)]="user.color" value="green" name="radios" required>
-          <label class="option">Blue</label>
+          Green
+        </label>
+        <label class="radio-option">
           <input type="radio" [(ngModel)]="user.color" value="blue" name="radios" required>
-      </div>
-  </div>
-  <div *ngIf="color.invalid && color.touched" class="alert alert-danger form-error">
+          Blue
+        </label>
+    </div>
+    <div *ngIf="color.invalid && sampleForm.submitted" class="col-3 form-error"> <!-- Include alert & alert-danger class to get Bootstrap Error styles -->
       <div *ngIf="color.errors.required">You have not selected an option</div>
+    </div>
   </div>
 
   <!-- Dropdown/Select/Options menu with single selection and required validation -->
@@ -91,19 +107,19 @@
     <div class="col-2">
       <select
         id="city"
+        class="select-options"
+        [ngClass]="{'error-field': city.invalid && sampleForm.submitted}"
         name="single-select"
         #city="ngModel"
-        [(ngModel)]="user.citySelected"
+        [(ngModel)]="user.city"
         required>
         <option *ngFor="let city of cities" [value]="city">{{city}}</option>
-      </select>
+      </select> <!-- Include form-control class to get Bootstrap Select styles -->
+    </div>
+    <div *ngIf="city.invalid && sampleForm.submitted" class="col-3 form-error"> <!-- Include alert & alert-danger class to get Bootstrap Error styles -->
+      <div *ngIf="city.errors.required">You have not selected an option</div>
     </div>
   </div>
-  <div *ngIf="city.invalid && city.touched" class="alert alert-danger form-error">
-    <div *ngIf="city.errors.required">You have not selected an option</div>
-  </div>
-
-  <!-- Dropdown/Select/Options menu with multiple selection and required validation -->
 
   <!-- ngbootstrap Dropdown menu without validation -->
   <div class="form-field row">
@@ -121,7 +137,7 @@
     </div>
   </div>
 
-  <!-- Datepicker without any validation (Needs ng-bootstrap module to be installed) -->
+  <!-- Datepicker without validation (Needs ng-bootstrap module to be installed) -->
   <div class="form-field row">
     <label class="form-labels col-3">DOB</label>
     <div class="input-group col-4">
@@ -132,24 +148,31 @@
           [(ngModel)]="user.dob"
           ngbDatepicker
           #dobPicker="ngbDatepicker" />
-      <button class="btn btn-outline-success input-group-btn" (click)="dobPicker.toggle()" type="button">Cal</button>
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" (click)="dobPicker.toggle()" type="button">
+          <img src="../assets/img/calendar.svg" class="calendar-icon" />
+        </button>
+      </span>
     </div>
   </div>
 
   <!-- Timepicker without any validation (Needs ng-bootstrap module to be installed) -->
   <div class="form-field row">
-      <label class="form-labels col-3">Time of Meeting</label>
+    <label class="form-labels col-3">Time of Meeting</label>
+    <div class="col-3">
       <ngb-timepicker
           name="meeting"
-          [(ngModel)]="user.meeting"
-          [meridian]="true"></ngb-timepicker>
+          [(ngModel)] = "user.meeting"
+          [meridian]="true"
+          required></ngb-timepicker>
+    </div>
   </div>
 
   <div class="form-field row justify-content-center">
     <div class="col-3">
       <div class="row justify-content-between">
         <button class="btn btn-outline-danger col-4" (click)="sampleForm.reset()" type="button">Reset</button>
-        <button class="btn btn-outline-success col-4" (click)="validateForm(sampleForm)" type="button">Submit</button>
+        <button class="btn btn-outline-success col-4" type="submit">Submit</button>
       </div>
     </div>
   </div>

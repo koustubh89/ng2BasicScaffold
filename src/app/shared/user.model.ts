@@ -4,6 +4,7 @@ export class User {
         public email: string,
         public securityType: object,
         public color: string,
-        public citySelected: string
+        public citySelected: string,
+        public meeting: object
     ) { };
 }
